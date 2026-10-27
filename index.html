@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Galaxy</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at center,
+    #172554 0%,
+    #09091d 45%,
+    #02010a 100%
+  );
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1.4); }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 30px;
+}
+
+h1 {
+  font-size: clamp(40px, 9vw, 85px);
+  letter-spacing: 5px;
+  color: #fff;
+  text-shadow:
+    0 0 10px #00eaff,
+    0 0 30px #00aaff,
+    0 0 70px #7c3aed;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(70deg); }
+}
+
+p {
+  margin: 20px 0 30px;
+  color: #c4b5fd;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+button {
+  padding: 15px 30px;
+  border: 1px solid #00eaff;
+  border-radius: 30px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #00aaff55;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #00d9ff;
+  color: #050518;
+  box-shadow: 0 0 40px #00d9ff;
+  transform: scale(1.08);
+}
+
+#message {
+  margin-top: 25px;
+  color: #67e8f9;
+  min-height: 20px;
+}
+
+.planet {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #312e81, #06b6d4);
+  box-shadow: 0 0 50px #8b5cf6;
+  top: 12%;
+  right: 12%;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-25px) rotate(20deg); }
+}
+
+@media (max-width: 600px) {
+  .planet {
+    width: 55px;
+    height: 55px;
+    top: 12%;
+    right: 8%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+<div class="planet"></div>
+
+<main class="container">
+  <h1>GALAXY</h1>
+  <p>EXPLORE THE INFINITE UNIVERSE</p>
+  <button onclick="createMagic()">
+    ✦ Create Magic
+  </button>
+  <div id="message"></div>
+</main>
+
+<script>
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 120; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+
+  const size = Math.random() * 3 + 1;
+  star.style.width = size + "px";
+  star.style.height = size + "px";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDelay = Math.random() * 3 + "s";
+
+  stars.appendChild(star);
+}
+
+function createMagic() {
+  document.getElementById("message").textContent =
+    "✨ The universe is yours to explore! ✨";
+
+  for (let i = 0; i < 30; i++) {
+    const star = document.createElement("div");
+    star.textContent = "✦";
+
+    star.style.position = "absolute";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.color = "#67e8f9";
+    star.style.fontSize = Math.random() * 20 + 10 + "px";
+    star.style.pointerEvents = "none";
+
+    document.body.appendChild(star);
+
+    setTimeout(() => star.remove(), 2000);
+  }
+}
+</script>
+
+</body>
+</html>
